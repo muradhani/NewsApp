@@ -1,5 +1,6 @@
 package com.example.newsapp.ui.adapter;
 
+import com.bumptech.glide.Glide;
 import com.example.newsapp.R;
 import com.example.newsapp.databinding.NewsRvItemBinding;
 import com.example.newsapp.databinding.RelatedStoriesRvItemBinding;
@@ -15,11 +16,13 @@ public class RelatedStoriesRvAdapter extends BaseRecyclerViewAdapter<RelatedStor
     }
     @Override
     public void bind(RelatedStoriesRvItemBinding binding, Article item) {
-
+        Glide.with(binding.getRoot()).load(item.getUrlToImage()).into(binding.imgNewsImage);
+        binding.tvNewsTitle.setText(item.getTitle());
+        binding.tvNewsBody.setText(item.getContent());
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.top_stories_rv_item;
+        return R.layout.related_stories_rv_item;
     }
 }

@@ -10,16 +10,18 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="@dimen/_10sdp">
+
+        android:background="@color/white">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/_10sdp"
             tools:context=".ui.fragments.NewsDetailedFragment">
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
-                android:layout_marginVertical="@dimen/_20sdp"
+                android:layout_marginVertical="@dimen/_40sdp"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -61,6 +63,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/body" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/related_stories_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"

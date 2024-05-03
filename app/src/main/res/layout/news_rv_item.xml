@@ -36,6 +36,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/img_product"
                 tools:text="test"
+                android:layout_marginHorizontal="@dimen/_10sdp"
                 android:maxLines="1"/>
             <TextView
                 android:id="@+id/body"
@@ -48,6 +49,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/title"
                 tools:text="body"
                 android:ellipsize="end"
+                android:layout_marginHorizontal="@dimen/_10sdp"
                 android:maxLines="2"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

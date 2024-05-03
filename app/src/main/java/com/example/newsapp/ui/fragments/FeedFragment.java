@@ -58,6 +58,43 @@ public class FeedFragment extends Fragment implements NewsItemClickListener {
         // Set the ViewModel to the binding
        // binding.setViewModel(viewModel);
         // Specify the fragment view
+        viewModel.fetchTopHeadlines();
+        // Initialize adapters with empty lists
+        topStoriesAdapter = new TopStoriesRvAdapter(topStoriesList);
+
+
+        // Set adapters to RecyclerViews
+        binding.topStoriesRv.setAdapter(topStoriesAdapter);
+        binding.newsRv.setAdapter(newsAdapter);
+
+        // Set layout managers for RecyclerViews
+//        binding.topStoriesRv.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
+//        binding.newsRv.setLayoutManager(new GridLayoutManager(requireContext(), 2));
+
+        // Here you can fetch data and update the lists used by adapters if needed
+        // For now, let's assume you have already populated the lists with data
+        // You can call updateData() method on adapters to update the data
+
+        // Example:
+        // topStoriesList.addAll(someData);
+        // topStoriesAdapter.updateData(topStoriesList);
+        // Observe LiveData from ViewModel
+        viewModel.getNewsResponse().observe(getViewLifecycleOwner(), new Observer<NewsResponseDto>() {
+            @Override
+            public void onChanged(NewsResponseDto newsResponse) {
+                // Update RecyclerView adapters with new data
+                topStoriesList = newsResponse.getArticles();
+                topStoriesAdapter.setData(topStoriesList);
+                newsAdapter.setData(topStoriesList);
+            }
+        });
+
+        viewModel.getErrorMessage().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String errorMessage) {
+                // Handle error message if needed
+            }
+        });
         return binding.getRoot();
     }
 
@@ -104,8 +141,13 @@ public class FeedFragment extends Fragment implements NewsItemClickListener {
     }
 
     @Override
-    public void onProductClicked(String id) {
+    public void onProductClicked(Article item) {
+        Bundle bundle = new Bundle();
+        bundle.putString("title", item.getTitle());
+        bundle.putString("imageUrl", item.getUrlToImage());
+        bundle.putString("body", item.getDescription());
+
         NavController navController = NavHostFragment.findNavController(this);
-        navController.navigate(R.id.action_feedFragment_to_newsDetailedFragment);
+        navController.navigate(R.id.action_feedFragment_to_newsDetailedFragment, bundle);
     }
 }

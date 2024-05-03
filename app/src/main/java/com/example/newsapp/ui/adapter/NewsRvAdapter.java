@@ -27,7 +27,7 @@ public class NewsRvAdapter extends BaseRecyclerViewAdapter<NewsRvItemBinding, Ar
 
             @Override
             public void onClick(View v) {
-                listener.onProductClicked(item.getSource().getId());
+                listener.onProductClicked(item);
             }
         });
     }
